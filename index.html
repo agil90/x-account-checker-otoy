@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<meta name="theme-color"
+content="#0b0f16">
+
+<title>X Account Checker</title>
+
+
+<style>
+
+/* ==========================================
+   BASIC
+========================================== */
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+background:#0b0f16;
+color:#f1f5f9;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+.wrap{
+width:100%;
+max-width:720px;
+margin:auto;
+padding:15px 10px 30px;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+header{
+text-align:center;
+padding:3px 0 14px;
+}
+
+header h1{
+margin:0;
+font-size:27px;
+font-weight:800;
+color:#fff;
+}
+
+.bolt{
+color:#ffc107;
+}
+
+header p{
+margin:5px 0 0;
+color:#8d98a8;
+font-size:14px;
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
+.card{
+background:#151b23;
+border:1px solid #303844;
+border-radius:12px;
+padding:10px;
+margin-bottom:8px;
+box-shadow:0 3px 10px rgba(0,0,0,.18);
+}
+
+.card h2{
+margin:0 0 7px;
+font-size:17px;
+line-height:1.2;
+}
+
+
+/* ==========================================
+   TEXTAREA
+========================================== */
+
+textarea{
+display:block;
+width:100%;
+height:135px;
+min-height:135px;
+resize:vertical;
+
+background:#0b1017;
+
+border:1px solid #343d48;
+border-radius:10px;
+
+color:#e8edf3;
+
+padding:9px 11px;
+
+font-family:monospace;
+font-size:14px;
+line-height:1.4;
+
+outline:none;
+}
+
+textarea:focus{
+border-color:#2695ff;
+}
+
+
+/* ==========================================
+   BUTTON / ACTION
+========================================== */
+
+.actions{
+display:flex;
+flex-direction:column;
+gap:6px;
+margin-top:8px;
+}
+
+button,
+.upload{
+width:100%;
+height:38px;
+min-height:38px;
+
+border:0;
+border-radius:9px;
+
+font-size:14px;
+font-weight:bold;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+cursor:pointer;
+
+margin:0;
+}
+
+.green{
+background:#20a947;
+color:white;
+}
+
+.green:active{
+background:#168b38;
+}
+
+.gray{
+background:#60656b;
+color:white;
+}
+
+button:disabled{
+opacity:.45;
+}
+
+.fileInput{
+display:none;
+}
+
+
+/* ==========================================
+   HELPER
+========================================== */
+
+.helper{
+display:block;
+
+margin-top:6px;
+
+font-size:11px;
+
+color:#8d98a8;
+
+line-height:1.4;
+}
+
+
+/* ==========================================
+   PROGRESS
+========================================== */
+
+.progressCard{
+padding:7px 10px !important;
+margin-bottom:8px !important;
+}
+
+.progressCard h2{
+font-size:16px !important;
+margin:0 0 4px !important;
+}
+
+.progressBox{
+height:4px;
+
+background:#28313c;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin:4px 0 3px;
+}
+
+#bar{
+height:4px;
+
+width:0%;
+
+background:#2595ff;
+
+transition:width:.3s;
+}
+
+.progressInfo{
+display:flex;
+
+justify-content:space-between;
+
+color:#aeb9c7;
+
+font-size:11px;
+}
+
+
+/* ==========================================
+   DASHBOARD
+========================================== */
+
+.stats{
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:6px;
+}
+
+.stat{
+background:#0d121a;
+
+border:1px solid #303a46;
+
+border-radius:9px;
+
+height:48px;
+
+padding:6px 4px;
+
+text-align:center;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.stat span{
+display:block;
+
+font-size:9px;
+
+color:#8c97a6;
+
+margin-bottom:1px;
+}
+
+.stat b{
+font-size:19px;
+}
+
+.total{
+border-top:3px solid #2595ff;
+}
+
+.activeBox{
+border-top:3px solid #20c963;
+}
+
+.suspendedBox{
+border-top:3px solid #e63946;
+}
+
+.notfoundBox{
+border-top:3px solid #87909b;
+}
+
+
+/* ==========================================
+   SUSPENDED
+========================================== */
+
+.suspendedCard{
+border-color:#54262c;
+}
+
+.empty{
+color:#8c97a6;
+
+font-size:12px;
+}
+
+.suspendedItem{
+background:#29151a;
+
+border:1px solid #7c252e;
+
+border-radius:7px;
+
+padding:6px 9px;
+
+margin-bottom:4px;
+
+color:#ff6975;
+
+font-family:monospace;
+
+font-size:12px;
+}
+
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.tableWrap{
+overflow-x:auto;
+
+-webkit-overflow-scrolling:touch;
+}
+
+table{
+width:100%;
+
+min-width:650px;
+
+border-collapse:collapse;
+
+background:#0d121a;
+}
+
+th{
+background:#202b39;
+
+color:#dce5ee;
+
+padding:6px;
+
+font-size:10px;
+
+text-align:left;
+
+white-space:nowrap;
+}
+
+td{
+padding:6px;
+
+border-bottom:1px solid #222c37;
+
+font-size:11px;
+
+color:#d8e0e8;
+
+white-space:nowrap;
+}
+
+.badge{
+display:inline-block;
+
+padding:4px 7px;
+
+border-radius:20px;
+
+font-size:9px;
+
+font-weight:bold;
+
+min-width:62px;
+
+text-align:center;
+}
+
+.badgeActive{
+background:#159447;
+}
+
+.badgeSuspended{
+background:#dc3039;
+}
+
+.badgeNotFound{
+background:#626871;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer{
+text-align:center;
+
+margin-top:10px;
+
+color:#788493;
+
+font-size:11px;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:500px){
+
+.wrap{
+padding:12px 9px 25px;
+}
+
+header{
+padding:2px 0 11px;
+}
+
+header h1{
+font-size:25px;
+}
+
+header p{
+font-size:13px;
+}
+
+.card{
+padding:9px;
+margin-bottom:7px;
+}
+
+.card h2{
+font-size:16px;
+margin-bottom:6px;
+}
+
+textarea{
+height:125px;
+min-height:125px;
+
+font-size:13px;
+
+padding:8px 10px;
+}
+
+.actions{
+gap:5px;
+margin-top:7px;
+}
+
+button,
+.upload{
+height:36px;
+min-height:36px;
+
+font-size:13px;
+
+border-radius:8px;
+}
+
+.helper{
+font-size:10px;
+margin-top:5px;
+}
+
+.progressCard{
+padding:6px 9px !important;
+}
+
+.progressCard h2{
+font-size:15px !important;
+margin-bottom:3px !important;
+}
+
+.progressBox{
+height:4px;
+
+margin:3px 0 2px;
+}
+
+.progressInfo{
+font-size:10px;
+}
+
+.stat{
+height:45px;
+}
+
+.stat span{
+font-size:8px;
+}
+
+.stat b{
+font-size:18px;
+}
+
+.suspendedItem{
+font-size:11px;
+padding:5px 8px;
+}
+
+th{
+padding:5px;
+font-size:9px;
+}
+
+td{
+padding:5px;
+font-size:10px;
+}
+
+.badge{
+font-size:8px;
+min-width:58px;
+padding:3px 6px;
+}
+
+footer{
+font-size:10px;
+margin-top:8px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header>
+
+<h1>
+<span class="bolt">⚡</span>
+X Account Checker
+</h1>
+
+<p>
+Cek status akun X dari daftar username
+</p>
+
+</header>
+
+
+
+<!-- ==========================================
+     INPUT
+========================================== -->
+
+<div class="card">
+
+<h2>
+📋 Username Input
+</h2>
+
+<textarea
+id="usernameInput"
+placeholder="1. @febrysaput
+2. @CryptoST412
+3. @anilaju30
+4. @username4
+5. @suspendeduser
+6. @notfounduser"
+></textarea>
+
+
+<div class="actions">
+
+
+<label class="upload green">
+
+📁 Upload TXT
+
+<input
+class="fileInput"
+type="file"
+accept=".txt"
+id="fileInput"
+>
+
+</label>
+
+
+<button
+class="green"
+id="startButton"
+type="button"
+onclick="startChecking()"
+>
+
+▶ Start Checking
+
+</button>
+
+
+<button
+class="gray"
+id="exportButton"
+type="button"
+onclick="exportCSV()"
+disabled
+>
+
+↓ Export CSV
+
+</button>
+
+
+</div>
+
+
+<div class="helper">
+
+ℹ️ Satu username per baris.
+Nomor seperti 1., 2., 3. akan dipertahankan.
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================================
+     PROGRESS
+========================================== -->
+
+<div class="card progressCard">
+
+<h2>
+🔄 Progress
+</h2>
+
+<div class="progressBox">
+
+<div id="bar"></div>
+
+</div>
+
+<div class="progressInfo">
+
+<span id="progressText">
+0 / 0
+</span>
+
+<span id="percent">
+0%
+</span>
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================================
+     DASHBOARD
+========================================== -->
+
+<div class="card">
+
+<h2>
+📊 Dashboard
+</h2>
+
+<div class="stats">
+
+
+<div class="stat total">
+
+<span>
+TOTAL
+</span>
+
+<b id="total">
+0
+</b>
+
+</div>
+
+
+<div class="stat activeBox">
+
+<span>
+ACTIVE
+</span>
+
+<b id="active">
+0
+</b>
+
+</div>
+
+
+<div class="stat suspendedBox">
+
+<span>
+SUSPENDED
+</span>
+
+<b id="suspended">
+0
+</b>
+
+</div>
+
+
+<div class="stat notfoundBox">
+
+<span>
+NOT FOUND
+</span>
+
+<b id="notfound">
+0
+</b>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================================
+     SUSPENDED
+========================================== -->
+
+<div class="card suspendedCard">
+
+<h2>
+🔴 Suspended Accounts
+</h2>
+
+<div id="suspendedList">
+
+<div class="empty">
+Belum ada hasil.
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================================
+     RESULTS
+========================================== -->
+
+<div class="card">
+
+<h2>
+📋 Results
+</h2>
+
+<div class="tableWrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+#
+</th>
+
+<th>
+Username
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Name
+</th>
+
+<th>
+ID
+</th>
+
+<th>
+Detail
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="results">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
+<footer>
+
+X Account Checker PWA v2.0
+
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ==========================================
+   DATA
+========================================== */
+
+var results = [];
+
+
+
+/* ==========================================
+   FILE UPLOAD
+========================================== */
+
+document.getElementById("fileInput")
+.addEventListener("change",function(){
+
+var file=this.files[0];
+
+if(!file){
+return;
+}
+
+var reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById(
+"usernameInput"
+).value=e.target.result;
+
+};
+
+reader.readAsText(file);
+
+});
+
+
+
+/* ==========================================
+   PARSE USERNAME
+========================================== */
+
+function parseInput(){
+
+var text=
+document.getElementById(
+"usernameInput"
+).value;
+
+var lines=
+text.split(/\r?\n/);
+
+var list=[];
+
+
+for(
+var i=0;
+i<lines.length;
+i++
+){
+
+var line=
+lines[i].trim();
+
+if(!line){
+continue;
+}
+
+
+var number=i+1;
+
+var username=line;
+
+
+var match=
+line.match(
+/^(\d+)\s*[\.\)\-:]\s*(.+)$/
+);
+
+
+if(match){
+
+number=match[1];
+
+username=match[2];
+
+}
+
+
+username=
+username
+.trim()
+.replace(/^@+/,"");
+
+
+if(!username){
+continue;
+}
+
+
+list.push({
+
+number:number,
+
+username:username
+
+});
+
+}
+
+
+return list;
+
+}
+
+
+
+/* ==========================================
+   SIMULASI STATUS
+========================================== */
+
+function getStatus(username){
+
+var u=
+username.toLowerCase();
+
+
+/*
+   Username mengandung
+   "suspended"
+*/
+
+if(
+u.indexOf("suspended") !== -1
+){
+
+return {
+
+status:"SUSPENDED",
+
+name:"-",
+
+id:"-",
+
+detail:"Account suspended"
+
+};
+
+}
+
+
+/*
+   Username mengandung
+   "notfound"
+*/
+
+if(
+u.indexOf("notfound") !== -1
+){
+
+return {
+
+status:"NOT FOUND",
+
+name:"-",
+
+id:"-",
+
+detail:"User not found"
+
+};
+
+}
+
+
+/*
+   Selain itu ACTIVE
+*/
+
+return {
+
+status:"ACTIVE",
+
+name:username,
+
+id:
+"TEST-"+
+Math.floor(
+100000+
+Math.random()*900000
+),
+
+detail:"Account active"
+
+};
+
+}
+
+
+
+/* ==========================================
+   START CHECKING
+========================================== */
+
+function startChecking(){
+
+var list=
+parseInput();
+
+
+if(list.length===0){
+
+alert(
+"Masukkan username terlebih dahulu."
+);
+
+return;
+
+}
+
+
+var button=
+document.getElementById(
+"startButton"
+);
+
+button.disabled=true;
+
+
+document.getElementById(
+"exportButton"
+).disabled=true;
+
+
+results=[];
+
+
+var total=
+list.length;
+
+var index=0;
+
+
+/*
+   Reset Progress
+*/
+
+document.getElementById(
+"bar"
+).style.width="0%";
+
+
+document.getElementById(
+"progressText"
+).textContent=
+"0 / "+total;
+
+
+document.getElementById(
+"percent"
+).textContent=
+"0%";
+
+
+document.getElementById(
+"results"
+).innerHTML="";
+
+
+document.getElementById(
+"suspendedList"
+).innerHTML=
+'<div class="empty">Sedang checking...</div>';
+
+
+
+function next(){
+
+if(index>=total){
+
+button.disabled=false;
+
+document.getElementById(
+"exportButton"
+).disabled=false;
+
+return;
+
+}
+
+
+var item=
+list[index];
+
+
+var data=
+getStatus(
+item.username
+);
+
+
+results.push({
+
+number:item.number,
+
+username:item.username,
+
+status:data.status,
+
+name:data.name,
+
+id:data.id,
+
+detail:data.detail
+
+});
+
+
+index++;
+
+
+render();
+
+
+var percentValue=
+Math.round(
+index/
+total*
+100
+);
+
+
+document.getElementById(
+"bar"
+).style.width=
+percentValue+"%";
+
+
+document.getElementById(
+"progressText"
+).textContent=
+index+
+" / "+
+total;
+
+
+document.getElementById(
+"percent"
+).textContent=
+percentValue+
+"%";
+
+
+setTimeout(
+next,
+350
+);
+
+}
+
+
+next();
+
+}
+
+
+
+/* ==========================================
+   RENDER
+========================================== */
+
+function render(){
+
+var table=
+document.getElementById(
+"results"
+);
+
+table.innerHTML="";
+
+
+for(
+var i=0;
+i<results.length;
+i++
+){
+
+var r=
+results[i];
+
+var badge="";
+
+
+if(
+r.status==="ACTIVE"
+){
+
+badge=
+'<span class="badge badgeActive">ACTIVE</span>';
+
+}
+
+else if(
+r.status==="SUSPENDED"
+){
+
+badge=
+'<span class="badge badgeSuspended">SUSPENDED</span>';
+
+}
+
+else{
+
+badge=
+'<span class="badge badgeNotFound">NOT FOUND</span>';
+
+}
+
+
+var row=
+document.createElement("tr");
+
+
+row.innerHTML=
+
+"<td>"+
+escapeHTML(r.number)+
+"</td>"+
+
+"<td>@"+
+escapeHTML(r.username)+
+"</td>"+
+
+"<td>"+
+badge+
+"</td>"+
+
+"<td>"+
+escapeHTML(r.name)+
+"</td>"+
+
+"<td>"+
+escapeHTML(r.id)+
+"</td>"+
+
+"<td>"+
+escapeHTML(r.detail)+
+"</td>";
+
+
+table.appendChild(row);
+
+}
+
+
+updateDashboard();
+
+}
+
+
+
+/* ==========================================
+   DASHBOARD
+========================================== */
+
+function updateDashboard(){
+
+var total=
+results.length;
+
+var active=0;
+
+var suspended=0;
+
+var notfound=0;
+
+
+for(
+var i=0;
+i<results.length;
+i++
+){
+
+if(
+results[i].status==="ACTIVE"
+){
+
+active++;
+
+}
+
+if(
+results[i].status==="SUSPENDED"
+){
+
+suspended++;
+
+}
+
+if(
+results[i].status==="NOT FOUND"
+){
+
+notfound++;
+
+}
+
+}
+
+
+document.getElementById(
+"total"
+).textContent=
+total;
+
+
+document.getElementById(
+"active"
+).textContent=
+active;
+
+
+document.getElementById(
+"suspended"
+).textContent=
+suspended;
+
+
+document.getElementById(
+"notfound"
+).textContent=
+notfound;
+
+
+/*
+   Suspended List
+*/
+
+var box=
+document.getElementById(
+"suspendedList"
+);
+
+
+if(suspended===0){
+
+box.innerHTML=
+'<div class="empty">Belum ada akun suspended.</div>';
+
+return;
+
+}
+
+
+box.innerHTML="";
+
+
+for(
+var j=0;
+j<results.length;
+j++
+){
+
+if(
+results[j].status!=="SUSPENDED"
+){
+
+continue;
+
+}
+
+
+var div=
+document.createElement(
+"div"
+);
+
+div.className=
+"suspendedItem";
+
+
+div.textContent=
+results[j].number+
+". @"+
+results[j].username;
+
+
+box.appendChild(div);
+
+}
+
+}
+
+
+
+/* ==========================================
+   EXPORT CSV
+========================================== */
+
+function exportCSV(){
+
+if(results.length===0){
+
+return;
+
+}
+
+
+var csv=
+"#,Username,Status,Name,ID,Detail\n";
+
+
+for(
+var i=0;
+i<results.length;
+i++
+){
+
+var r=
+results[i];
+
+
+csv+=
+csvValue(r.number)+","+
+csvValue("@"+r.username)+","+
+csvValue(r.status)+","+
+csvValue(r.name)+","+
+csvValue(r.id)+","+
+csvValue(r.detail)+
+"\n";
+
+}
+
+
+var blob=
+new Blob(
+[
+"\ufeff"+
+csv
+],
+{
+type:"text/csv"
+}
+);
+
+
+var url=
+URL.createObjectURL(
+blob
+);
+
+
+var a=
+document.createElement(
+"a"
+);
+
+
+a.href=url;
+
+a.download=
+"x_account_checker.csv";
+
+
+document.body.appendChild(a);
+
+a.click();
+
+document.body.removeChild(a);
+
+
+URL.revokeObjectURL(url);
+
+}
+
+
+
+/* ==========================================
+   CSV VALUE
+========================================== */
+
+function csvValue(value){
+
+return '"'+
+String(value)
+.replace(
+/"/g,
+'""'
+)+
+'"';
+
+}
+
+
+
+/* ==========================================
+   HTML ESCAPE
+========================================== */
+
+function escapeHTML(value){
+
+return String(value)
+.replace(
+/&/g,
+"&amp;"
+)
+.replace(
+/</g,
+"&lt;"
+)
+.replace(
+/>/g,
+"&gt;"
+)
+.replace(
+/"/g,
+"&quot;"
+)
+.replace(
+/'/g,
+"&#039;"
+);
+
+}
+
+
+</script>
+
+</body>
+</html>
