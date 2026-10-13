@@ -428,6 +428,17 @@ button:disabled{
 }
 
 
+.btn-copy-suspended{display:block;width:100%;margin:0 0 8px;padding:9px 12px;color:#fff;background:linear-gradient(135deg,#b91c1c,#ef4444);border:1px solid rgba(248,113,113,.4)}
+.suspended-card .section-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.suspended-card .section-title .title-text{min-width:0}
+.suspended-card .section-title .btn-copy-suspended{width:auto;flex-shrink:0;margin:0;padding:7px 9px;font-size:10px}
+@media(max-width:600px){
+  .suspended-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  .suspended-item{padding:8px 5px;font-size:10px;overflow-wrap:anywhere}
+  .suspended-card .section-title{align-items:flex-start}
+  .suspended-card .section-title .btn-copy-suspended{font-size:9px;padding:7px 6px}
+}
+
 /* =====================================================
    PROGRESS
    ===================================================== */
@@ -723,13 +734,8 @@ button:disabled{
 /* =====================================================
    SUSPENDED ACCOUNTS
    ===================================================== */
-
- .suspended-list{
-  display:flex;
-  flex-direction:column;
-
-  gap:4px;
-}
+.suspended-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:6px}
+.suspended-column{display:flex;flex-direction:column;gap:4px;min-width:0}
 
 .suspended-item{
   padding:11px;
@@ -1169,7 +1175,8 @@ button:disabled{
 <div class="card suspended-card">
 
   <div class="section-title">
-    Suspended Accounts
+    <span class="title-text">Suspended Accounts</span>
+    <button type="button" class="btn-copy-suspended" id="copySuspendedBtn" onclick="copySuspended()" disabled>📋 Salin Semua</button>
   </div>
 
 
@@ -1985,61 +1992,62 @@ function updateDashboard(){
    ========================================================= */
 
 function renderSuspended(){
+  const box = document.getElementById("suspendedList");
+  const suspended = results.filter(item => item.status === "SUSPENDED");
+  const copyBtn = document.getElementById("copySuspendedBtn");
+  if(copyBtn) copyBtn.disabled = suspended.length === 0;
 
-  const box =
-    document.getElementById(
-      "suspendedList"
-    );
-
-
-  const suspended =
-    results.filter(
-      item =>
-        item.status ===
-        "SUSPENDED"
-    );
-
-
-  if(
-    suspended.length === 0
-  ){
-
-    box.innerHTML = `
-
-      <div class="empty">
-        Belum ada akun suspended
-      </div>
-
-    `;
-
+  if(suspended.length === 0){
+    box.innerHTML = `<div class="empty">Belum ada akun suspended</div>`;
     return;
-
   }
 
+  const columns = [];
+  for(let i = 0; i < suspended.length; i += 10){
+    columns.push(suspended.slice(i, i + 10));
+  }
 
-  box.innerHTML =
-    suspended
-      .map(
-        item => `
+  box.innerHTML = columns.map(column => `
+    <div class="suspended-column">
+      ${column.map(item => `
+        <div class="suspended-item">${escapeHTML(String(item.number))}. @${escapeHTML(item.username)}</div>
+      `).join("")}
+    </div>
+  `).join("");
+}
 
-          <div class="suspended-item">
+async function copySuspended(){
+  const suspended = results.filter(item => item.status === "SUSPENDED");
+  if(suspended.length === 0){
+    alert("Belum ada akun suspended untuk disalin.");
+    return;
+  }
 
-            ${escapeHTML(
-              String(
-                item.number
-              )
-            )}.
+  const text = suspended.map(item => `${item.number}. @${item.username}`).join("\n");
+  const button = document.getElementById("copySuspendedBtn");
 
-            @${escapeHTML(
-              item.username
-            )}
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(error){
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const copied = document.execCommand("copy");
+    textarea.remove();
+    if(!copied){
+      alert("Gagal menyalin. Silakan coba lagi.");
+      return;
+    }
+  }
 
-          </div>
-
-        `
-      )
-      .join("");
-
+  if(button){
+    const oldText = button.textContent;
+    button.textContent = "✓ Tersalin!";
+    setTimeout(() => button.textContent = oldText, 1600);
+  }
 }
 
 
