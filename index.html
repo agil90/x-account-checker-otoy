@@ -428,15 +428,18 @@ button:disabled{
 }
 
 
-.btn-copy-suspended{display:block;width:100%;margin:0 0 8px;padding:9px 12px;color:#fff;background:linear-gradient(135deg,#b91c1c,#ef4444);border:1px solid rgba(248,113,113,.4)}
+.btn-copy-suspended{display:block;width:100%;margin:0 0 8px;padding:9px 12px;color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;background:linear-gradient(135deg,#1687ff,#5546e8);border:1px solid rgba(77,163,255,.35);box-shadow:0 0 18px rgba(37,124,255,.20)}
 .suspended-card .section-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .suspended-card .section-title .title-text{min-width:0}
-.suspended-card .section-title .btn-copy-suspended{width:auto;flex-shrink:0;margin:0;padding:7px 9px;font-size:10px}
+.suspended-card .section-title .btn-copy-suspended{width:auto;min-width:122px;flex-shrink:0;margin:0;padding:7px 14px;font-size:10px}
 @media(max-width:600px){
   .suspended-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
-  .suspended-item{padding:8px 5px;font-size:10px;overflow-wrap:anywhere}
+  .suspended-row{padding:5px 3px;grid-template-columns:16px minmax(0,1fr) auto;gap:2px}
+  .suspended-number{font-size:7px}
+  .suspended-username{font-size:7px}
+  .suspended-status .badge{font-size:5px;padding:3px 2px}
   .suspended-card .section-title{align-items:flex-start}
-  .suspended-card .section-title .btn-copy-suspended{font-size:9px;padding:7px 6px}
+  .suspended-card .section-title .btn-copy-suspended{min-width:122px;font-size:9px;padding:7px 12px}
 }
 
 /* =====================================================
@@ -734,8 +737,15 @@ button:disabled{
 /* =====================================================
    SUSPENDED ACCOUNTS
    ===================================================== */
-.suspended-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:6px}
-.suspended-column{display:flex;flex-direction:column;gap:4px;min-width:0}
+.suspended-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:8px;width:100%}
+.suspended-column{min-width:0;overflow:hidden;border:1px solid rgba(77,163,255,.12);border-radius:10px;background:rgba(10,15,23,.75)}
+.suspended-head{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:3px;padding:6px 5px;color:#8491a4;font-size:7px;font-weight:900;border-bottom:1px solid rgba(77,163,255,.20)}
+.suspended-row{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:3px;align-items:center;padding:5px;border-bottom:1px solid rgba(61,73,91,.35);background:rgba(16,23,33,.75);min-height:34px}
+.suspended-row:last-child{border-bottom:0}
+.suspended-number{color:#697587;font-size:8px}
+.suspended-username{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e8eef7;font-size:8px;font-weight:800}
+.suspended-status{justify-self:end}
+.suspended-status .badge{font-size:6px;padding:3px 4px}
 
 .suspended-item{
   padding:11px;
@@ -1176,7 +1186,7 @@ button:disabled{
 
   <div class="section-title">
     <span class="title-text">Suspended Accounts</span>
-    <button type="button" class="btn-copy-suspended" id="copySuspendedBtn" onclick="copySuspended()" disabled>📋 Salin Semua</button>
+    <button type="button" class="btn-copy-suspended" id="copySuspendedBtn" onclick="copySuspended()" disabled style="color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;">📋 Salin Semua</button>
   </div>
 
 
@@ -2009,8 +2019,13 @@ function renderSuspended(){
 
   box.innerHTML = columns.map(column => `
     <div class="suspended-column">
+      <div class="suspended-head"><span>#</span><span>Username / Name</span><span>Status</span></div>
       ${column.map(item => `
-        <div class="suspended-item">${escapeHTML(String(item.number))}. @${escapeHTML(item.username)}</div>
+        <div class="suspended-row">
+          <div class="suspended-number">${escapeHTML(String(item.number))}</div>
+          <div class="suspended-username" title="@${escapeHTML(item.username)}">@${escapeHTML(item.username)}</div>
+          <div class="suspended-status"><span class="badge badge-suspended">SUSPENDED</span></div>
+        </div>
       `).join("")}
     </div>
   `).join("");
