@@ -978,86 +978,6 @@ button:disabled{
 }
 
 
-/* FUTURISTIC GIFT EFFECTS — only inside the gift overlay */
-.congrats-overlay{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;background:radial-gradient(ellipse at 50% 38%,rgba(56,189,248,.17),transparent 36%),radial-gradient(ellipse at 70% 68%,rgba(168,85,247,.20),transparent 42%),rgba(2,5,18,.91);overflow:hidden;backdrop-filter:none;-webkit-backdrop-filter:none;isolation:isolate;cursor:pointer}
-.congrats-overlay.show{display:flex;animation:overlayIn .4s ease-out both}
-.congrats-message{position:relative;z-index:2;width:min(100%,520px);padding:clamp(25px,6vw,38px) 18px 27px;text-align:center;border:1px solid transparent;border-radius:28px;background:linear-gradient(145deg,rgba(9,18,39,.96),rgba(23,28,72,.96) 52%,rgba(55,26,100,.95)) padding-box,linear-gradient(120deg,#22d3ee,#818cf8,#e879f9,#facc15,#22d3ee) border-box;background-size:auto,300% 300%;box-shadow:0 24px 90px rgba(0,0,0,.45),0 0 28px rgba(34,211,238,.23),0 0 75px rgba(168,85,247,.22),inset 0 1px 0 rgba(255,255,255,.16);color:#fff;font-weight:1000;font-size:clamp(29px,7.4vw,45px);line-height:1.2;letter-spacing:.3px;text-shadow:0 2px 0 rgba(0,0,0,.15),0 0 14px rgba(255,255,255,.65);animation:cardPop .65s cubic-bezier(.16,1.4,.35,1) both,congratsGlow 2s ease-in-out .65s infinite alternate,gradientFlow 5s ease infinite;overflow:hidden}
-.congrats-message:before{content:'✦  TROFI UNLOCKED  ✦';display:block;width:max-content;max-width:100%;margin:0 auto 17px;padding:7px 13px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:linear-gradient(90deg,rgba(34,211,238,.16),rgba(192,132,252,.2));font-size:clamp(10px,2.8vw,12px);font-weight:900;letter-spacing:2px;color:#dbeafe;text-shadow:0 0 12px #60a5fa;animation:badgeShine 2.4s ease-in-out infinite}
-.congrats-message:after{content:'HASIL BERHASIL DISALIN  •  TAP DI MANA SAJA UNTUK MENUTUP';display:block;margin-top:19px;font-size:clamp(9px,2.5vw,11px);font-weight:800;letter-spacing:1.2px;color:#c4b5fd;text-shadow:0 0 12px rgba(167,139,250,.7)}
-.congrats-message .count-line{display:block;margin-top:20px;padding:17px 10px;border:1px solid rgba(103,232,249,.36);border-radius:18px;background:linear-gradient(110deg,rgba(8,145,178,.22),rgba(124,58,237,.25),rgba(219,39,119,.17));box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 24px rgba(34,211,238,.13);font-size:clamp(16px,4.6vw,27px);line-height:1.4;letter-spacing:.15px;color:#f0fdff;text-shadow:0 0 8px rgba(255,255,255,.7),0 0 22px rgba(34,211,238,.7);animation:countPulse 1.25s ease-in-out infinite alternate;position:relative;overflow:hidden}
-.congrats-message .count-line:after{content:'';position:absolute;inset:-60% auto -60% -35%;width:22%;transform:rotate(22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.26),transparent);animation:lightSweep 2.8s ease-in-out infinite}
-.congrats-firework{position:absolute;left:var(--x);top:var(--y);width:4px;height:4px;border-radius:50%;background:var(--c);box-shadow:0 0 5px 1px var(--c);pointer-events:none;animation:fireworkBurst 1.25s ease-out 1 both;animation-delay:var(--delay)}
-.congrats-firework:before{content:'';position:absolute;inset:-20px;background:repeating-conic-gradient(from 0deg,var(--c) 0deg 2deg,transparent 3deg 30deg);mask:radial-gradient(circle,transparent 0 12%,#000 16% 22%,transparent 28%);-webkit-mask:radial-gradient(circle,transparent 0 12%,#000 16% 22%,transparent 28%);animation:fireworkBurst 1.25s ease-out 1 both}
-
-/* Rotating energy portal behind the message */
-.congrats-portal{position:absolute;left:50%;top:50%;width:min(70vw,420px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:.8;z-index:0;background:conic-gradient(from 0deg,transparent 0 8%,rgba(34,211,238,.95) 12%,transparent 18% 29%,rgba(192,132,252,.9) 34%,transparent 42% 55%,rgba(250,204,21,.85) 60%,transparent 67% 82%,rgba(96,165,250,.9) 88%,transparent 95%);mask:radial-gradient(circle,transparent 57%,#000 59%,#000 61%,transparent 64%);-webkit-mask:radial-gradient(circle,transparent 57%,#000 59%,#000 61%,transparent 64%);filter:none;animation:portalSpin 10s linear infinite}
-.congrats-portal:before,.congrats-portal:after{content:'';position:absolute;inset:9%;border:1px solid rgba(129,140,248,.6);border-radius:50%;box-shadow:0 0 18px rgba(168,85,247,.35),inset 0 0 18px rgba(34,211,238,.18);transform:rotateX(62deg) rotate(20deg)}
-.congrats-portal:after{inset:17%;border-color:rgba(34,211,238,.6);transform:rotateX(68deg) rotate(-35deg);animation:portalSpin 9s linear infinite reverse}
-.congrats-shockwave{position:absolute;left:50%;top:50%;width:18px;height:18px;border:2px solid rgba(103,232,249,.95);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1;box-shadow:0 0 18px #22d3ee,inset 0 0 12px #818cf8;animation:shockwave .95s cubic-bezier(.12,.6,.25,1) both}
-.congrats-gold{position:absolute;top:-8%;left:var(--x);width:var(--s);height:var(--s);border-radius:2px;background:linear-gradient(135deg,#fff7ae,#facc15 48%,#fb923c);box-shadow:0 0 5px rgba(250,204,21,.65);pointer-events:none;z-index:1;animation:goldFall var(--dur) linear var(--delay) 1;opacity:0}
-.congrats-message{z-index:3}
-@keyframes portalSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-@keyframes portalBreathe{from{filter:drop-shadow(0 0 5px rgba(34,211,238,.35));opacity:.48}to{filter:drop-shadow(0 0 20px rgba(192,132,252,.8));opacity:.92}}
-@keyframes shockwave{0%{width:12px;height:12px;opacity:1;border-width:4px}100%{width:145vmax;height:145vmax;opacity:0;border-width:1px}}
-@keyframes goldFall{0%{transform:translate3d(0,-8vh,0) rotate(0deg);opacity:0}12%{opacity:1}85%{opacity:.9}100%{transform:translate3d(var(--drift),115vh,0) rotate(720deg);opacity:0}}
-@keyframes overlayIn{from{opacity:0}to{opacity:1}}
-@keyframes cardPop{0%{transform:scale(.72) translateY(32px);opacity:0}75%{transform:scale(1.025)}100%{transform:scale(1) translateY(0);opacity:1}}
-@keyframes congratsGlow{from{box-shadow:0 24px 90px rgba(0,0,0,.45),0 0 28px rgba(34,211,238,.2),0 0 65px rgba(168,85,247,.18),inset 0 1px 0 rgba(255,255,255,.16)}to{box-shadow:0 24px 90px rgba(0,0,0,.45),0 0 40px rgba(34,211,238,.36),0 0 95px rgba(168,85,247,.3),inset 0 1px 0 rgba(255,255,255,.22)}}
-@keyframes countPulse{from{transform:scale(1);filter:brightness(1)}to{transform:scale(1.018);filter:brightness(1.3)}}
-@keyframes fireworkBurst{0%{transform:scale(.15);opacity:0}18%{opacity:1}100%{transform:scale(1.25);opacity:0;box-shadow:0 0 0 48px transparent}}
-@keyframes sparkSpin{to{transform:rotate(360deg)}}
-@keyframes gradientFlow{0%,100%{background-position:0 0,0% 50%}50%{background-position:0 0,100% 50%}}
-@keyframes badgeShine{0%,100%{filter:brightness(1);transform:translateY(0)}50%{filter:brightness(1.35);transform:translateY(-2px)}}
-@keyframes lightSweep{0%,35%{left:-35%}75%,100%{left:125%}}
-@media(max-width:380px){.congrats-message{padding:24px 12px 22px;border-radius:23px}.congrats-message .count-line{padding:13px 6px}.congrats-message:after{letter-spacing:.6px}}
-@media(prefers-reduced-motion:reduce){.congrats-overlay.show,.congrats-message,.congrats-message:before,.congrats-message .count-line,.congrats-firework,.congrats-firework:before,.congrats-portal,.congrats-portal:after,.congrats-gold,.congrats-shockwave{animation:none}}
-
-
-/* CINEMATIC SUPERHERO IMPACT — gift overlay only */
-.congrats-overlay.impact-mode{background:radial-gradient(circle at 50% 50%,rgba(30,41,90,.28),transparent 30%),rgba(1,4,16,.94)}
-.hero-flyer{position:absolute;z-index:5;left:50%;top:50%;font-size:clamp(38px,10vw,64px);filter:drop-shadow(0 0 5px rgba(56,189,248,.7));opacity:0;pointer-events:none;will-change:transform,opacity}
-.congrats-overlay.show .hero-one{animation:heroFromNW 1.2s cubic-bezier(.18,.7,.25,1) .02s both}
-.congrats-overlay.show .hero-two{animation:heroFromN 1.2s cubic-bezier(.18,.7,.25,1) .06s both}
-.congrats-overlay.show .hero-three{animation:heroFromNE 1.2s cubic-bezier(.18,.7,.25,1) .10s both}
-.congrats-overlay.show .hero-four{animation:heroFromE 1.2s cubic-bezier(.18,.7,.25,1) .14s both}
-.congrats-overlay.show .hero-five{animation:heroFromSE 1.2s cubic-bezier(.18,.7,.25,1) .18s both}
-.congrats-overlay.show .hero-six{animation:heroFromS 1.2s cubic-bezier(.18,.7,.25,1) .22s both}
-.congrats-overlay.show .hero-seven{animation:heroFromSW 1.2s cubic-bezier(.18,.7,.25,1) .26s both}
-.congrats-overlay.show .hero-eight{animation:heroFromW 1.2s cubic-bezier(.18,.7,.25,1) .30s both}
-.speed-lines{position:absolute;inset:-20%;z-index:2;opacity:0;pointer-events:none;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg 9deg,rgba(125,211,252,.5) 9.5deg 10deg,transparent 10.5deg 20deg);transform:scale(1.15)}
-.congrats-overlay.show .speed-lines{animation:speedRush .85s ease-in .1s both}
-.impact-flash{position:absolute;inset:0;z-index:6;background:radial-gradient(circle at center,#fff 0%,rgba(186,230,253,.95) 5%,rgba(59,130,246,.55) 18%,transparent 58%);opacity:0;pointer-events:none;mix-blend-mode:screen}
-.congrats-overlay.show .impact-flash{animation:impactFlash .72s ease-out .88s both}
-.screen-cracks{position:absolute;inset:0;width:100%;height:100%;z-index:7;opacity:0;pointer-events:none;overflow:visible;filter:drop-shadow(0 0 1px rgba(255,255,255,.85)) drop-shadow(0 0 3px rgba(186,230,253,.45))}
-.screen-cracks .crack-main{fill:none;stroke:rgba(225,239,255,.9);stroke-width:.95;stroke-linecap:round;stroke-linejoin:round}
-.screen-cracks .crack-fine{fill:none;stroke:rgba(190,211,238,.68);stroke-width:.48;stroke-linecap:round;stroke-linejoin:round}
-.screen-cracks .crack-glint{fill:none;stroke:rgba(255,255,255,.8);stroke-width:.22;stroke-linecap:round;opacity:.7}
-.screen-cracks .impact-ring{fill:rgba(5,8,20,.22);stroke:rgba(220,235,255,.82);stroke-width:.55}.screen-cracks .impact-chip{fill:rgba(3,7,18,.28);stroke:rgba(235,245,255,.72);stroke-width:.55}.screen-cracks .glass-chip{fill:rgba(225,240,255,.2);stroke:rgba(255,255,255,.72);stroke-width:.45}
-.congrats-overlay.show .screen-cracks{animation:crackReveal 1.3s ease-out .95s both}
-.congrats-message.impact-message{opacity:0;transform:scale(.25) rotateX(65deg);animation:none;overflow:visible;background:linear-gradient(145deg,rgba(5,12,32,.97),rgba(22,26,76,.96) 52%,rgba(62,20,95,.96)) padding-box,linear-gradient(120deg,#22d3ee,#818cf8,#f0abfc,#facc15,#22d3ee) border-box;box-shadow:0 0 30px rgba(34,211,238,.35),0 0 90px rgba(168,85,247,.28),inset 0 1px 0 rgba(255,255,255,.2);z-index:8}
-.congrats-overlay.show .congrats-message.impact-message{animation:threeDReveal .9s cubic-bezier(.16,1.3,.3,1) 1.18s both,congratsGlow 2s ease-in-out 2.1s infinite alternate,gradientFlow 5s ease infinite}
-.impact-kicker{display:block;width:max-content;max-width:100%;margin:0 auto 16px;padding:7px 13px;border:1px solid rgba(103,232,249,.5);border-radius:999px;background:linear-gradient(90deg,rgba(8,145,178,.35),rgba(124,58,237,.4));font-size:clamp(10px,2.8vw,12px);letter-spacing:2px;color:#cffafe}
-.impact-title{font-size:clamp(28px,7.2vw,43px);line-height:1.06;font-weight:1000;letter-spacing:.3px;color:#fff;text-shadow:0 2px 0 #64748b,0 4px 0 #334155,0 6px 0 #1e293b,0 10px 18px rgba(0,0,0,.75),0 0 24px rgba(34,211,238,.9),0 0 45px rgba(192,132,252,.75);transform:perspective(500px) rotateX(8deg);animation:titleElectric .9s ease-in-out 2s infinite alternate}
-.congrats-message.impact-message .count-line{margin-top:20px}
-.impact-cheer{margin-top:15px;font-size:clamp(12px,3.3vw,16px);font-weight:900;letter-spacing:.8px;color:#fde68a;text-shadow:0 0 12px rgba(250,204,21,.6)}
-.impact-hint{margin-top:13px;font-size:9px;letter-spacing:1.2px;color:#c4b5fd}
-/* Eight lightweight superhero-style flyers rush in from every compass direction */
-@keyframes heroFromNW{0%{opacity:0;transform:translate(-58vw,-48vh) rotate(-42deg) scale(.45)}15%{opacity:1}76%{opacity:1;transform:translate(-8px,-8px) rotate(18deg) scale(1.08)}100%{opacity:0;transform:translate(0,0) rotate(65deg) scale(.08)}}
-@keyframes heroFromN{0%{opacity:0;transform:translate(0,-60vh) rotate(-25deg) scale(.4)}15%{opacity:1}76%{opacity:1;transform:translate(3px,-8px) rotate(15deg) scale(1.08)}100%{opacity:0;transform:translate(0,0) rotate(70deg) scale(.08)}}
-@keyframes heroFromNE{0%{opacity:0;transform:translate(58vw,-48vh) rotate(42deg) scale(.45)}15%{opacity:1}76%{opacity:1;transform:translate(8px,-8px) rotate(-18deg) scale(1.08)}100%{opacity:0;transform:translate(0,0) rotate(-65deg) scale(.08)}}
-@keyframes heroFromE{0%{opacity:0;transform:translate(68vw,0) rotate(65deg) scale(.4)}15%{opacity:1}76%{opacity:1;transform:translate(8px,2px) rotate(-15deg) scale(1.08)}100%{opacity:0;transform:translate(0,0) rotate(-80deg) scale(.08)}}
-@keyframes heroFromSE{0%{opacity:0;transform:translate(58vw,48vh) rotate(135deg) scale(.45)}15%{opacity:1}76%{opacity:1;transform:translate(8px,8px) rotate(-18deg) scale(1.08)}100%{opacity:0;transform:translate(0,0) rotate(-65deg) scale(.08)}}
-@keyframes heroFromS{0%{opacity:0;transform:translate(0,60vh) rotate(180deg) scale(.4)}15%{opacity:1}76%{opacity:1;transform:translate(-3px,8px) rotate(15deg) scale(1.08)}100%{opacity:0;transform:translate(0,0) rotate(70deg) scale(.08)}}
-@keyframes heroFromSW{0%{opacity:0;transform:translate(-58vw,48vh) rotate(-135deg) scale(.45)}15%{opacity:1}76%{opacity:1;transform:translate(-8px,8px) rotate(18deg) scale(1.08)}100%{opacity:0;transform:translate(0,0) rotate(65deg) scale(.08)}}
-@keyframes heroFromW{0%{opacity:0;transform:translate(-68vw,0) rotate(-65deg) scale(.4)}15%{opacity:1}76%{opacity:1;transform:translate(-8px,-2px) rotate(15deg) scale(1.08)}100%{opacity:0;transform:translate(0,0) rotate(80deg) scale(.08)}}
-@keyframes speedRush{0%{opacity:0;transform:scale(.2) rotate(0)}25%{opacity:.9}100%{opacity:0;transform:scale(1.5) rotate(18deg)}}
-@keyframes impactFlash{0%{opacity:0}12%{opacity:1}38%{opacity:.85}100%{opacity:0}}
-@keyframes crackReveal{0%{opacity:0;transform:scale(.15)}15%{opacity:1;transform:scale(1.05)}55%{opacity:1}100%{opacity:.88;transform:scale(1)}}
-@keyframes threeDReveal{0%{opacity:0;transform:perspective(600px) scale(.2) rotateX(70deg) translateY(40px);filter:blur(12px)}55%{opacity:1;transform:perspective(600px) scale(1.06) rotateX(-8deg) translateY(-4px);filter:blur(0)}75%{transform:perspective(600px) scale(.98) rotateX(3deg)}100%{opacity:1;transform:perspective(600px) scale(1) rotateX(0);filter:blur(0)}}
-@keyframes titleElectric{from{filter:brightness(1);text-shadow:0 2px 0 #64748b,0 4px 0 #334155,0 6px 0 #1e293b,0 10px 18px rgba(0,0,0,.75),0 0 18px rgba(34,211,238,.6)}to{filter:brightness(1.25);text-shadow:0 2px 0 #64748b,0 4px 0 #334155,0 6px 0 #1e293b,0 10px 18px rgba(0,0,0,.75),0 0 30px rgba(34,211,238,1),0 0 55px rgba(192,132,252,.9)}}
-@media(prefers-reduced-motion:reduce){.hero-flyer,.speed-lines,.impact-flash,.screen-cracks,.congrats-overlay.show .congrats-message.impact-message{animation:none!important;opacity:1;transform:none}}
-/* Mobile performance: keep the impact dramatic but reduce GPU-heavy layers. */
-@media(max-width:600px){.congrats-overlay{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.congrats-portal{opacity:.42}.congrats-firework:before{display:none}.congrats-message.impact-message{box-shadow:0 0 24px rgba(34,211,238,.22),inset 0 1px 0 rgba(255,255,255,.12)}.screen-cracks{filter:none}}
 
 </style>
 </head>
@@ -1299,55 +1219,7 @@ button:disabled{
 
 
 
-<div class="congrats-overlay impact-mode" id="congratsOverlay" role="dialog" aria-modal="true" aria-label="Ucapan selamat" onclick="closeCongrats()">
-  <div class="congrats-portal" aria-hidden="true"></div>
-  <div class="hero-flyer hero-one" aria-hidden="true" title="Superman">🦸‍♂️</div>
-  <div class="hero-flyer hero-two" aria-hidden="true" title="Superman">🦸‍♂️</div>
-  <div class="hero-flyer hero-three" aria-hidden="true" title="Superman">🦸‍♂️</div>
-  <div class="hero-flyer hero-four" aria-hidden="true" title="Superman">🦸‍♂️</div>
-  <div class="hero-flyer hero-five" aria-hidden="true" title="Superman">🦸‍♂️</div>
-  <div class="hero-flyer hero-six" aria-hidden="true" title="Superman">🦸‍♂️</div>
-  <div class="hero-flyer hero-seven" aria-hidden="true" title="Superman">🦸‍♂️</div>
-  <div class="hero-flyer hero-eight" aria-hidden="true" title="Superman">🦸‍♂️</div>
-  <div class="speed-lines" aria-hidden="true"></div>
-  <div class="impact-flash" aria-hidden="true"></div>
-  <svg class="screen-cracks" viewBox="0 0 360 780" preserveAspectRatio="none" aria-hidden="true">
-<g class="crack-main">
-<path d="M180 390 L166 354 147 330 151 302 128 278 116 241 91 221 77 183 49 164 35 126 0 103"/><path d="M166 354 L177 328 165 306 181 278 169 251 184 225 176 195 190 168 184 137 202 105 198 72 214 40 211 0"/>
-<path d="M180 390 L209 365 235 354 255 329 281 320 296 291 323 275 339 246 360 233"/><path d="M235 354 L226 326 244 304 238 280 260 259 255 232 280 213 286 185 315 168 326 138 360 116"/>
-<path d="M180 390 L195 421 218 443 219 471 245 494 252 523 278 544 286 574 314 596 323 628 350 650 360 674"/><path d="M218 443 L204 466 216 491 198 516 209 541 191 567 199 592 181 619 190 648 174 675 180 708 163 741 166 780"/>
-<path d="M180 390 L151 411 130 431 103 440 87 466 61 481 49 509 24 526 0 550"/><path d="M130 431 L139 456 121 476 130 502 109 521 115 549 92 568 84 594 57 612 49 642 20 661 0 690"/>
-</g><g class="crack-fine">
-<path d="M147 330 L120 320 102 300 81 299 65 276 43 268 27 245 0 235 M128 278 L103 270 93 249 69 241 61 219 38 210 35 190 14 176"/>
-<path d="M177 328 L157 314 139 292 116 288 M165 306 L146 284 148 263 130 247 132 225 113 208 116 188 96 169 100 148 78 127"/>
-<path d="M184 225 L204 210 214 187 236 177 243 153 263 143 275 119 299 109 310 85 334 73 360 48 M190 168 L213 155 221 132 244 121 248 98 271 85"/>
-<path d="M281 320 L298 340 319 342 334 364 360 372 M296 291 L317 300 330 320 350 326 360 342 M260 259 L283 250 299 231 323 228 339 208 360 203"/>
-<path d="M245 494 L269 484 285 465 309 461 324 441 349 435 360 418 M252 523 L276 530 289 551 314 556 326 578 351 589 360 610"/>
-<path d="M198 516 L178 536 161 557 139 561 126 584 103 593 92 615 69 625 60 649 36 660 24 683 0 701 M191 567 L211 586 218 607 240 621 245 644 268 657 275 681 298 696 307 721 331 737 340 761"/>
-<path d="M103 440 L89 422 67 416 51 397 29 393 12 375 0 369 M87 466 L68 454 47 458 29 444 0 447 M61 481 L39 477 23 492 0 500"/>
-<path d="M151 411 L139 394 119 388 109 369 88 363 76 344 53 337 42 318 20 312 0 295 M209 365 L222 386 243 390 256 409 279 416 291 435 315 443 332 461 360 467"/>
-</g><g class="crack-glint">
-<path d="M180 390 L166 354 147 330 151 302 128 278 116 241 91 221 77 183 49 164 35 126 0 103 M180 390 L209 365 235 354 255 329 281 320 296 291 323 275 339 246 360 233 M180 390 L195 421 218 443 219 471 245 494 252 523 278 544 286 574 314 596 323 628 350 650 360 674 M180 390 L151 411 130 431 103 440 87 466 61 481 49 509 24 526 0 550"/>
-</g>
-<!-- Central spider-web fracture: uneven rings and short splinter branches, not lightning bolts -->
-<g class="crack-main">
-<path d="M180 390 L174 378 179 369 188 372 194 382 190 392 181 399 171 395 166 385 170 375"/>
-<path d="M166 385 L154 380 149 370 137 365 M174 378 L169 364 173 354 M188 372 L197 360 210 357 M194 382 L207 382 219 375 M190 392 L201 404 204 417 M181 399 L179 413 169 423 M171 395 L158 402 147 399 M170 375 L159 364 151 351"/>
-<path d="M174 369 L163 358 157 344 M194 382 L208 394 222 398 M181 399 L190 414 195 430 M166 385 L150 389 137 385"/>
-</g>
-<g class="crack-fine">
-<path d="M158 380 L148 376 141 380 M149 370 L139 354 127 350 M173 354 L166 344 168 334 M197 360 L201 346 212 340 M210 357 L223 350 228 339 M219 375 L235 371 244 362 M207 382 L223 388 233 400 M204 417 L215 429 216 442 M169 423 L164 437 153 445 M147 399 L133 405 125 416 M137 385 L123 378 111 381 M151 351 L145 337 135 329"/>
-<path d="M179 369 L181 358 188 350 M190 392 L202 390 211 398 M181 413 L173 427 177 440 M158 402 L145 411 133 410 M166 344 L157 333 159 322 M223 350 L237 344 242 331 M235 371 L250 375 258 386 M215 429 L228 439 230 452 M153 445 L146 458 135 464"/>
-</g>
-<g class="crack-glint">
-<path d="M180 390 L174 378 179 369 188 372 194 382 190 392 181 399 171 395 166 385 170 375"/>
-<path d="M180 390 L166 354 147 330 151 302 128 278 116 241 91 221 77 183 49 164 35 126 0 103 M180 390 L177 328 165 306 181 278 169 251 184 225 176 195 190 168 184 137 202 105 198 72 214 40 211 0 M180 390 L209 365 235 354 255 329 281 320 296 291 323 275 339 246 360 233 M180 390 L195 421 218 443 219 471 245 494 252 523 278 544 286 574 314 596 323 628 350 650 360 674 M180 390 L151 411 130 431 103 440 87 466 61 481 49 509 24 526 0 550"/>
-</g>
-<path class="impact-chip" d="M177 383 L181 376 187 380 188 387 182 393 176 389 Z"/><path class="glass-chip" d="M153 373 l-5 -7 8 2 Z"/><path class="glass-chip" d="M205 399 l9 1 -4 6 Z"/><path class="glass-chip" d="M169 414 l-2 8 -5 -5 Z"/>
-<circle class="impact-ring" cx="180" cy="390" r="8"/><circle class="impact-ring" cx="180" cy="390" r="15" stroke-dasharray="1 3"/>
-</svg>
-  <div class="congrats-message impact-message"><div class="impact-kicker">⚡ IMPACT ACHIEVED ⚡</div><div class="impact-title">JUMLAH AKUN<br>SUSPENDED</div><span class="count-line" id="congratsCount">✨ 0 AKUN SUSPENDED ✨</span><div class="impact-cheer">🎉 SELAMAT YA • TETAP SEMANGAT! 🔥</div><div class="impact-hint">KETUK LAYAR UNTUK MENUTUP</div></div>
-</div>
+
 
 <script>
 
@@ -2194,40 +2066,29 @@ async function copySuspended(){
   if(button){
     const oldText = button.textContent;
     button.textContent = "✓ Tersalin!";
-    setTimeout(() => button.textContent = oldText, 1600);
+    button.setAttribute("aria-live", "polite");
+    setTimeout(() => {
+      button.textContent = oldText;
+    }, 1600);
   }
 
-  const overlay = document.getElementById("congratsOverlay");
-  const countLine = document.getElementById("congratsCount");
-  if(countLine) countLine.textContent = `✨ ${suspended.length} AKUN ✨`;
-  if(overlay){
-    overlay.querySelectorAll(".congrats-firework,.congrats-gold,.congrats-shockwave").forEach(item => item.remove());
-    const shockwave = document.createElement("span");
-    shockwave.className = "congrats-shockwave";
-    overlay.appendChild(shockwave);
-    setTimeout(() => shockwave.remove(), 1100);
-    const colors = ["#facc15", "#fb7185", "#60a5fa", "#4ade80", "#c084fc", "#ffffff"];
-    for(let i = 0; i < 14; i++){
-      const spark = document.createElement("span");
-      spark.className = "congrats-firework";
-      spark.style.setProperty("--x", `${Math.random() * 94 + 3}%`);
-      spark.style.setProperty("--y", `${Math.random() * 88 + 6}%`);
-      spark.style.setProperty("--c", colors[i % colors.length]);
-      spark.style.setProperty("--delay", `${Math.random() * 1.4}s`);
-      overlay.appendChild(spark);
-    }
-    for(let i = 0; i < 8; i++){
-      const gold = document.createElement("span");
-      gold.className = "congrats-gold";
-      gold.style.setProperty("--x", `${Math.random() * 100}%`);
-      gold.style.setProperty("--s", `${Math.random() * 5 + 2}px`);
-      gold.style.setProperty("--dur", `${Math.random() * 3 + 3.5}s`);
-      gold.style.setProperty("--delay", `${Math.random() * 4}s`);
-      gold.style.setProperty("--drift", `${Math.random() * 120 - 60}px`);
-      overlay.appendChild(gold);
-    }
-    overlay.classList.add("show");
+  // Notifikasi singkat, tanpa animasi hadiah.
+  let notice = document.getElementById("copySuccessNotice");
+  if(!notice){
+    notice = document.createElement("div");
+    notice.id = "copySuccessNotice";
+    notice.textContent = "✓ Tersalin!";
+    notice.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:99999;background:#15803d;color:#fff;padding:10px 18px;border-radius:10px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.25);";
+    notice.setAttribute("role", "status");
+    document.body.appendChild(notice);
   }
+  notice.textContent = "✓ Tersalin!";
+  notice.style.display = "block";
+  clearTimeout(window.copySuccessNoticeTimer);
+  window.copySuccessNoticeTimer = setTimeout(() => {
+    notice.style.display = "none";
+  }, 1800);
+
 }
 
 function closeCongrats(){
